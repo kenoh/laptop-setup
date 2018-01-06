@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  become_user: root
+  vars:
+    dotfiles_git: 
+    dotfiles_stow:
+      - bash
+      - vim
+      - emacs
+      - i3
+      - dunst
+      - compton
+    install_packages:
+      - vim
+      - emacs
+      - i3
+      - dunst
+      - compton
+      - git
+      - tig
+      - mc
+      - nmap
+      - wireshark
+  roles:
+    - dotfiles
+    - install_packages
+    - google-chrome

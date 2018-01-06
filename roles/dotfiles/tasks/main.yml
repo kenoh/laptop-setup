@@ -1,0 +1,10 @@
+---
+- name: Install packages Git and Stow
+  package:
+    name:
+      - git
+      - stow
+    state: present
+  become: true
+- name: Clone dotfiles_git repository
+- name: Stow folders in dotfiles_stow
