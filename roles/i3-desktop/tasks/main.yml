@@ -1,0 +1,51 @@
+---
+- name: Install packages
+  package:
+    name:
+      - i3
+      - jq
+      - py3status
+      - dunst
+      - redshift
+    state: present
+  become: yes
+
+# configs
+- name: i3 config
+  copy:
+    src: i3.config
+    dest: "{{ ansible_user_dir }}/.config/i3/config"
+  ignore: yes
+- name: py3status config
+  copy:
+    src: py3status.config
+    dest: "{{ ansible_user_dir }}/.config/i3status/config"
+  ignore: yes
+
+# backlight
+- name: Install backlight udev rules
+  copy:
+    src: 90-backlight.rules
+    dest: /etc/udev/rules.d/90-backlight.rules
+    backup: yes
+  become: yes
+- name: Trigger backlight udev rules
+  command: udevadm trigger --action=add --subsystem-match=backlight
+
+#services
+- name: Ensure directory for dunst service present
+  file:
+    path: "{{ ansible_user_dir }}/.config/systemd/user"
+    state: directory
+- name: Install dunst service
+  copy:
+    src: dunst.service
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/dunst.service"
+    backup: yes
+- name: Enable and start the dunst service
+  systemd:
+    name: dunst.service
+    daemon_reload: yes
+    user: yes
+    enabled: yes
+    state: started

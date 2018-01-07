@@ -5,9 +5,6 @@
     install_packages:
       - vim
       - emacs
-      - i3
-      - dunst
-      - compton
       - git
       - tig
       - mc
@@ -15,4 +12,5 @@
       - wireshark
   roles:
     - install-packages
+    - i3-desktop
     - google-chrome
