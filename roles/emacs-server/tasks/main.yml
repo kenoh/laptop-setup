@@ -1,0 +1,24 @@
+---
+- name: install packages
+  package:
+    name: emacs
+    state: present
+  become: yes
+- name: ensure service directory exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/systemd/user"
+    state: directory
+    recurse: yes
+- name: install service
+  copy:
+    src: emacs.service
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/emacs.service"
+    backup: yes
+- name: enable and start service
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    name: emacs.service
+    state: started
+    no_block: yes
+    user: yes
