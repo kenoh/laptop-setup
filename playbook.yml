@@ -23,5 +23,5 @@
       - wireshark
   roles:
     - dotfiles
-    - install_packages
+    - install-packages
     - google-chrome

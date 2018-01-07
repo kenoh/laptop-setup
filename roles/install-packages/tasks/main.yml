@@ -1,0 +1,6 @@
+---
+- name: Ensure packages present
+  package:
+    name: "{{ install_packages }}"
+    state: present
+  become: true

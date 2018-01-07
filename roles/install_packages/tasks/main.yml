@@ -1,6 +1,0 @@
----
-- name: Install packages
-  package:
-    name: {{ install_packages }}
-    state: present
-  become: true
