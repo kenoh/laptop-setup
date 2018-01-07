@@ -15,12 +15,10 @@
   copy:
     src: i3.config
     dest: "{{ ansible_user_dir }}/.config/i3/config"
-  ignore: yes
 - name: py3status config
   copy:
     src: py3status.config
     dest: "{{ ansible_user_dir }}/.config/i3status/config"
-  ignore: yes
 
 # backlight
 - name: Install backlight udev rules

@@ -15,6 +15,7 @@
       - wireshark
       - colordiff
       - terminator
+      - gimp
   roles:
     - install-packages
     - i3-desktop
