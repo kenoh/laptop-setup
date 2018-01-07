@@ -1,0 +1,15 @@
+---
+- name: add repo
+  yum_repository:
+    name: spotify
+    description: negativo17 - Spotify
+    baseurl: "https://negativo17.org/repos/spotify/fedora-$releasever/$basearch/"
+    enabled: yes
+    gpgkey: "https://negativo17.org/repos/RPM-GPG-KEY-slaanesh"
+    gpgcheck: 1
+  become: yes
+- name: install spotify
+  package:
+    name: spotify
+    state: present
+  become: yes
