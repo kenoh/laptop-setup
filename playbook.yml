@@ -8,8 +8,13 @@
       - git
       - tig
       - mc
+      - htop
+      - strace
       - nmap
+      - firefox
       - wireshark
+      - colordiff
+      - terminator
   roles:
     - install-packages
     - i3-desktop
