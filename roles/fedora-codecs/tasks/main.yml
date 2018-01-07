@@ -1,0 +1,28 @@
+---
+- name: add RPM Fusion repositories
+  yum_repository:
+    name: "rpmfusion-{{ item }}"
+    description: "RPM Fusion {{ item }} repository"
+    baseurl: "https://download1.rpmfusion.org/{{ item }}/fedora/releases/{{ ansible_distribution_version }}/Everything/{{ ansible_architecture }}/os/"
+    enabled: yes
+    gpgcheck: no
+  with_items:
+    - free
+    - nonfree
+  become: yes
+- name: install codecs and VLC
+  package:
+    name:
+      - gstreamer-plugins-base
+      - gstreamer1-plugins-base
+      - gstreamer-plugins-bad
+      - gstreamer-plugins-ugly
+      - gstreamer1-plugins-ugly
+      - gstreamer-plugins-good-extras
+      - gstreamer1-plugins-good-extras
+      - gstreamer1-plugins-bad-freeworld
+      - ffmpeg
+      - gstreamer-ffmpeg
+      - vlc
+    state: present
+  become: yes

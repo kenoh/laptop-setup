@@ -24,3 +24,4 @@
     - docker
     - emacs-server
     - redshift-service
+    - fedora-codecs
