@@ -1,0 +1,7 @@
+---
+- name: Add user to common groups
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: audio,video,dialout,wheel
+  become: yes
