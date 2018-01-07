@@ -2,14 +2,6 @@
 - hosts: localhost
   become_user: root
   vars:
-    dotfiles_git: 
-    dotfiles_stow:
-      - bash
-      - vim
-      - emacs
-      - i3
-      - dunst
-      - compton
     install_packages:
       - vim
       - emacs
@@ -22,6 +14,5 @@
       - nmap
       - wireshark
   roles:
-    - dotfiles
     - install-packages
     - google-chrome
