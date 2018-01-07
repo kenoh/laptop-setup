@@ -1,0 +1,12 @@
+---
+- name: Install Vagrant
+  package:
+    name: vagrant
+    state: present
+  become: yes
+- name: Add user to required groups
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: vagrant,libvirt
+  become: yes
