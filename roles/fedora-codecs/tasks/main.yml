@@ -3,8 +3,8 @@
   yum_repository:
     name: "rpmfusion-{{ item }}"
     description: "RPM Fusion {{ item }} repository"
-    baseurl: "https://download1.rpmfusion.org/{{ item }}/fedora/releases/{{ ansible_distribution_version }}/Everything/{{ ansible_architecture }}/os/"
-    enabled: yes
+    baseurl: "https://download1.rpmfusion.org/{{ item }}/fedora/releases/$releasever/Everything/$basearch/os/"
+    enabled: "{{ item == 'free' }}"
     gpgcheck: no
   with_items:
     - free
