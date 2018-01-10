@@ -3,19 +3,29 @@
   become_user: root
   vars:
     install_packages:
-      - vim
-      - emacs
-      - git
-      - tig
-      - mc
-      - htop
-      - strace
-      - nmap
-      - firefox
-      - wireshark
+      - ack
       - colordiff
-      - terminator
+      - ctags
+      - emacs
+      - firefox
+      - gdb
       - gimp
+      - git
+      - global-ctags
+      - htop
+      - mc
+      - nmap
+      - python2-ipython
+      - python3-ipython
+      - screen
+      - strace
+      - terminator
+      - tig
+      - tmux
+      - vim
+      - wireshark
+      - python-xdot
+      - yum-utils
   roles:
     - install-packages
     - i3-desktop
