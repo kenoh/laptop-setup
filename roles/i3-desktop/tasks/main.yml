@@ -31,10 +31,11 @@
   command: udevadm trigger --action=add --subsystem-match=backlight
 
 #services
-- name: Ensure directory for dunst service present
+- name: Ensure directory for user services present
   file:
     path: "{{ ansible_user_dir }}/.config/systemd/user"
     state: directory
+# dunst service
 - name: Install dunst service
   copy:
     src: dunst.service
@@ -43,6 +44,19 @@
 - name: Enable and start the dunst service
   systemd:
     name: dunst.service
+    daemon_reload: yes
+    user: yes
+    enabled: yes
+    state: started
+# xscreensaver service
+- name: Install xscreensaver service
+  copy:
+    src: xscreensaver.service
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/xscreensaver.service"
+    backup: yes
+- name: Enable and start the xscreensaver service
+  systemd:
+    name: xscreensaver.service
     daemon_reload: yes
     user: yes
     enabled: yes
