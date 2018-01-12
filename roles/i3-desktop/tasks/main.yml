@@ -11,11 +11,19 @@
   become: yes
 
 # configs
-- name: i3 config
+- name: ensure .config/i3 dir exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/i3"
+    state: directory
+- name: copy i3 config
   copy:
     src: i3.config
     dest: "{{ ansible_user_dir }}/.config/i3/config"
-- name: py3status config
+- name: ensure .config/i3status dir exists
+  file:
+    path: "{{ ansible_user_dir }}/.config/i3status"
+    state: directory
+- name: copy py3status config
   copy:
     src: py3status.config
     dest: "{{ ansible_user_dir }}/.config/i3status/config"
@@ -29,6 +37,7 @@
   become: yes
 - name: Trigger backlight udev rules
   command: udevadm trigger --action=add --subsystem-match=backlight
+  become: yes
 
 #services
 - name: Ensure directory for dunst service present
