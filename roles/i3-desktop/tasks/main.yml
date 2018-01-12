@@ -6,6 +6,7 @@
       - jq
       - py3status
       - dunst
+      - xscreensaver
       - redshift
     state: present
   become: yes
