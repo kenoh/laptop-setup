@@ -51,6 +51,7 @@
   with_items:
     - { attr: HandleLidSwitch, value: lock }
     - { attr: HandlePowerKey, value: suspend }
+  become: yes
 
 #services
 - name: Ensure directory for user services present
