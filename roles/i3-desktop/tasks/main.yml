@@ -52,6 +52,13 @@
     - { attr: HandleLidSwitch, value: lock }
     - { attr: HandlePowerKey, value: suspend }
   become: yes
+  register: logind_conf_file
+- name: reload systemd-logind
+  when: logind_conf_file.changed
+  systemd:
+    name: systemd-logind
+    state: reloaded
+  become: yes
 
 #services
 - name: Ensure directory for user services present
