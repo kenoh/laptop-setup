@@ -40,6 +40,18 @@
   command: udevadm trigger --action=add --subsystem-match=backlight
   become: yes
 
+# adjust power management behaviour
+- name: set behaviour on lid closing and power kye pressing
+  lineinfile:
+    dest: "/etc/systemd/logind.conf"
+    insertafter: "^\\[Login\\]$"
+    regexp: "^{{ item.attr }}=.*$"
+    line: "{{ item.attr }}={{ item.value }}"
+    backup: yes
+  with_items:
+    - { attr: HandleLidSwitch, value: lock }
+    - { attr: HandlePowerKey, value: suspend }
+
 #services
 - name: Ensure directory for user services present
   file:
