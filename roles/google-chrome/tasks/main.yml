@@ -4,6 +4,7 @@
   register: google_chrome_rpm_check
   check_mode: no
   ignore_errors: yes
+  changed_when: False
 - name: Install Google Chrome
   package:
     name: https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
