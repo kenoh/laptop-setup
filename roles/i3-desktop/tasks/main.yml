@@ -53,11 +53,11 @@
     - { attr: HandlePowerKey, value: suspend }
   become: yes
   register: logind_conf_file
-- name: reload systemd-logind
+- name: restart systemd-logind
   when: logind_conf_file.changed
   systemd:
     name: systemd-logind
-    state: reloaded
+    state: restarted
   become: yes
 
 #services
