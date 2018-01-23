@@ -1,9 +1,11 @@
 [Unit]
 Description=Dunst notification manager
+Documentation=man:dunst(1)
 After=display-manager.service
 
 [Service]
 Environment="DISPLAY=:0"
+BusName=org.freedesktop.Notifications
 ExecStart=/usr/bin/dunst
 Restart=always
 
