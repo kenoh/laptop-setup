@@ -14,11 +14,12 @@
     src: redshift.service
     dest: "{{ ansible_user_dir }}/.config/systemd/user/redshift.service"
     backup: yes
+  register: redshift_service_file
 - name: enable and start service
   systemd:
     daemon_reload: yes
     enabled: yes
     name: redshift.service
-    state: started
+    state: "{{ 're' if redshift_service_file.changed else '' }}started"
     no_block: yes
     user: yes
