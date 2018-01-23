@@ -29,16 +29,8 @@
     src: py3status.config
     dest: "{{ ansible_user_dir }}/.config/i3status/config"
 
-# backlight
-- name: Install backlight udev rules
-  copy:
-    src: 90-backlight.rules
-    dest: /etc/udev/rules.d/90-backlight.rules
-    backup: yes
-  become: yes
-- name: Trigger backlight udev rules
-  command: udevadm trigger --action=add --subsystem-match=backlight
-  become: yes
+- name: Set up xbacklight
+  import_tasks: backlight.yml
 
 # adjust power management behaviour
 - name: set behaviour on lid closing and power kye pressing

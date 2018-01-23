@@ -1,0 +1,29 @@
+---
+- name: Install backlight udev rules
+  copy:
+    src: 90-backlight.rules
+    dest: /etc/udev/rules.d/90-backlight.rules
+    backup: yes
+  become: yes
+- name: Trigger backlight udev rules
+  command: udevadm trigger --action=add --subsystem-match=backlight
+  become: yes
+
+- name: Ensure ~/opt exists
+  file:
+    path: "{{ ansible_user_dir }}/opt"
+    state: directory
+- name: Clone wavexx/acpilight for xbacklight
+  git:
+    repo: https://github.com/wavexx/acpilight.git
+    dest: "{{ ansible_user_dir }}/opt/acpilight"
+
+- name: Ensure ~/bin exists
+  file:
+    path: "{{ ansible_user_dir }}/bin"
+    state: directory
+- name: Create a symlink to ~/bin
+  file:
+    src: "{{ ansible_user_dir }}/opt/acpilight/xbacklight"
+    dest: "{{ ansible_user_dir }}/bin/xbacklight"
+    state: link
