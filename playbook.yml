@@ -29,6 +29,7 @@
   roles:
     - install-packages
     - i3-desktop
+    - xscreensaver
     - google-chrome
     - user-groups
     - vagrant

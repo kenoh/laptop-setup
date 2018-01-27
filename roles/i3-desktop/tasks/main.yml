@@ -52,11 +52,6 @@
     state: restarted
   become: yes
 
-#services
-- name: Ensure directory for user services present
-  file:
-    path: "{{ ansible_user_dir }}/.config/systemd/user"
-    state: directory
 # dunst service
 - name: Install dunst service
   copy:
@@ -71,17 +66,3 @@
     user: yes
     enabled: yes
     state: "{{ 're' if dunst_service_file.changed else '' }}started"
-# xscreensaver service
-- name: Install xscreensaver service
-  copy:
-    src: xscreensaver.service
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/xscreensaver.service"
-    backup: yes
-  register: xscreensaver_service_file
-- name: Enable and start the xscreensaver service
-  systemd:
-    name: xscreensaver.service
-    daemon_reload: yes
-    user: yes
-    enabled: yes
-    state: "{{ 're' if xscreensaver_service_file.changed else '' }}started"

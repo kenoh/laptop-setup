@@ -1,0 +1,3 @@
+---
+dependencies:
+  - { role: enable-systemd-user-services }
