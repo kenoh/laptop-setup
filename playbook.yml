@@ -19,7 +19,7 @@
       - python3-ipython
       - screen
       - strace
-      - terminator
+      - tilix
       - tig
       - tmux
       - vim
