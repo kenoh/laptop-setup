@@ -40,6 +40,5 @@
     - vagrant
     - docker
     - emacs-server
-    - redshift-service
     - fedora-codecs
     - spotify
