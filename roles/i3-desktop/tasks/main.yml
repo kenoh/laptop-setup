@@ -6,8 +6,10 @@
       - jq
       - py3status
       - dunst
-      - xscreensaver
-      - redshift
+      - i3lock
+      - xss-lock
+      - xautolock
+      - redshift-gtk
     state: present
   become: yes
 
@@ -51,18 +53,3 @@
     name: systemd-logind
     state: restarted
   become: yes
-
-# dunst service
-- name: Install dunst service
-  copy:
-    src: dunst.service
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/dunst.service"
-    backup: yes
-  register: dunst_service_file
-- name: Enable and start the dunst service
-  systemd:
-    name: dunst.service
-    daemon_reload: yes
-    user: yes
-    enabled: yes
-    state: "{{ 're' if dunst_service_file.changed else '' }}started"
