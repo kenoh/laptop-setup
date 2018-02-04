@@ -37,6 +37,7 @@
     - i3-desktop
     - google-chrome
     - user-groups
+    - fedora-packaging
     - vagrant
     - docker
     - emacs-server

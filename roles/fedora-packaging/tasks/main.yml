@@ -1,0 +1,13 @@
+---
+- name: install packages
+  package:
+    name:
+      - fedpkg
+    state: present
+  become: yes
+- name: add user to groups
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: mock
+  become: yes
