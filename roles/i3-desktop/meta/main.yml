@@ -2,3 +2,4 @@
 dependencies:
   - { role: enable-systemd-user-services }
   - { role: user-directories }
+  - { role: arandr-autoconfig }

@@ -1,0 +1,16 @@
+---
+- set_fact:
+    prog: arandr-autoconfig
+    base: "{{ ansible_user_dir }}/opt"
+- set_fact:
+    clone: "{{ base }}/{{ prog }}"
+- name: clone repo
+  git:
+    repo: "https://github.com/kenoh/{{ prog }}.git"
+    dest: "{{ clone }}"
+    force: yes
+- name: symlink to ~/bin
+  file:
+    src: "{{ clone }}/{{ prog }}.py"
+    dest: "{{ ansible_user_dir }}/bin/{{ prog }}"
+    state: link
