@@ -1,0 +1,8 @@
+---
+- name: ensure directories are present
+  file:
+    path: "{{ ansible_user_dir }}/{{ item }}"
+    state: directory
+  with_items:
+    - bin
+    - opt
