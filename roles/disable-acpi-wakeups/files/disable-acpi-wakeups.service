@@ -1,0 +1,10 @@
+[Unit]
+Description=Disable random ACPI wake-ups from suspend
+Before=sleep.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "cat /proc/acpi/wakeup | grep pci: | grep enabled | grep -o '^....' | xargs -I {} -exec sh -c 'echo {} > /proc/acpi/wakeup'"
+
+[Install]
+WantedBy=sleep.target

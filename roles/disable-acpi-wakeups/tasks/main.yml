@@ -1,0 +1,15 @@
+---
+- set_fact:
+    svc: disable-acpi-wakeups.service
+- name: install service
+  copy:
+    src: "{{ svc }}"
+    dest: "/etc/systemd/system/{{ svc }}"
+    backup: yes
+  become: yes
+- name: enable service
+  systemd:
+    name: "{{ svc }}"
+    enabled: yes
+    daemon_reload: yes
+  become: yes

@@ -38,6 +38,7 @@
     - google-chrome
     - user-groups
     - fedora-packaging
+    - disable-acpi-wakeups
     - vagrant
     - docker
     - emacs-server
