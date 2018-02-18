@@ -5,7 +5,6 @@
       - i3
       - jq
       - py3status
-      - dunst
       - i3lock
       - xss-lock
       - xautolock

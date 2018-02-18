@@ -1,0 +1,30 @@
+---
+- name: Install package
+  package:
+    name: dunst
+    state: present
+  become: yes
+- name: Install service
+  copy:
+    src: dunst.service
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/dunst.service"
+    backup: yes
+  register: dunst_service_file
+- name: Have config dir
+  file:
+    path: "{{ ansible_user_dir }}/.config/dunst"
+    state: directory
+- name: Place config file
+  copy:
+    src: dunstrc
+    dest: "{{ ansible_user_dir }}/.config/dunst/dunstrc"
+    backup: yes
+  register: dunst_config_file
+- name: Enable and start the service
+  systemd:
+    name: dunst.service
+    daemon_reload: yes
+    user: yes
+    enabled: yes
+    state: "{{ 're' if dunst_service_file.changed or dunst_config_file.changed else '' }}started"
+

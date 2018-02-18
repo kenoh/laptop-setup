@@ -1,0 +1,54 @@
+[frame]
+    width = 1
+    color = "#383838"
+
+[global]
+	allow_markup = yes
+	format = "<b>%s</b>\n%b"
+	alignment = center
+	word_wrap = yes
+	ignore_newline = no
+	geometry = "350x5-30+20"
+	shrink = yes
+	separator_height = 3
+	separator_color = frame
+	icon_position = left
+	padding = 3
+	horizontal_padding = 3
+	separator_height = 3
+
+	monitor = 0
+	follow = mouse
+
+	indicate_hidden = yes
+	show_age_threshold = 60
+	idle_threshold = 120
+	sticky_history = yes
+	show_indicators = yes
+
+	startup_notification = false
+
+	dmenu = /usr/bin/dmenu -p dunst:
+	browser = /usr/bin/firefox -new-tab
+
+[shortcuts]
+	close = mod1+space
+	history = mod1+BackSpace
+	close_all = mod1+shift+space
+	context = mod1+shift+period
+
+[urgency_low]
+    background = "#757A80"
+    foreground = "#DDD5C6"
+    timeout = 0
+
+[urgency_normal]
+    background = "#D8CEBE"
+    foreground = "#332F2C"
+    timeout = 0
+
+[urgency_critical]
+    background = "#A73E28"
+    foreground = "#EDDEC9"
+    timeout = 0
+
