@@ -4,3 +4,13 @@
     name: docker
     state: present
   become: yes
+- name: Ensure docker group exists
+  group:
+    name: docker
+  become: yes
+- name: Add the user to docker group
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: docker
+  become: yes
