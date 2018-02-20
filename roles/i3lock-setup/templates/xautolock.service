@@ -1,0 +1,12 @@
+[Unit]
+Description=XAutoLock runs screen saver after an inactivity delay
+Documentation=man:xautolock(1)
+After=display-manager.service
+
+[Service]
+ExecStart=/usr/bin/xautolock -time 5 -locker {{ locker_command | quote }}
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

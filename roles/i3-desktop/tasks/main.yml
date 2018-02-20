@@ -5,9 +5,6 @@
       - i3
       - jq
       - py3status
-      - i3lock
-      - xss-lock
-      - xautolock
       - redshift-gtk
     state: present
   become: yes

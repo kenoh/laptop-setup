@@ -1,0 +1,28 @@
+---
+- name: Install packages
+  package:
+    name:
+      - xss-lock
+      - xautolock
+      - i3lock
+    state: present
+  become: yes
+- name: Install services
+  vars:
+    locker_command: i3lock -n -e -f -c 000000
+  template:
+    src: "{{ item }}.service"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/{{ item }}.service"
+    backup: yes
+  with_items:
+    - xss-lock
+    - xautolock
+  register: service_files
+- name: Enable and (re)start the services
+  systemd:
+    name: "{{ item.item }}.service"
+    daemon_reload: yes
+    user: yes
+    enabled: yes
+    state: "{{ 're' if item.changed else '' }}started"
+  with_items: "{{ service_files.results }}"
