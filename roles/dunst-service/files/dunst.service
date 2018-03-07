@@ -4,7 +4,9 @@ Documentation=man:dunst(1)
 After=display-manager.service
 
 [Service]
-BusName=org.freedesktop.Notifications
+# Better not use BusName because then dbus.service runs the dunst binary
+# by itself and handling this service file does not work at all.
+#BusName=org.freedesktop.Notifications
 ExecPre=/usr/bin/env
 ExecStart=/usr/bin/dunst
 Restart=always
