@@ -27,4 +27,4 @@
     user: yes
     enabled: yes
     state: "{{ 're' if dunst_service_file.changed or dunst_config_file.changed else '' }}started"
-
+- include_tasks: track-i3lock.yml

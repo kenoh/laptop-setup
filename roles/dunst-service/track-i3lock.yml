@@ -1,0 +1,22 @@
+---
+- set_fact:
+    name: dunst-i3lock-tracker
+- name: Install script
+  copy:
+    src: "{{ name }}.sh"
+    dest: "{{ ansible_user_dir }}/opt/{{ name }}.sh"
+    backup: yes
+  register: script_file
+- name: Install service
+  copy:
+    src: "{{ name }}.service"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/{{ name }}.service"
+    backup: yes
+  register: service_file
+- name: Enable and (re)start service
+  systemd:
+    name: "{{ name }}.service"
+    daemon_reload: yes
+    user: yes
+    enabled: yes
+    state: "{{ 're' if service_file.changed or script_file.changed else '' }}started"

@@ -1,0 +1,12 @@
+[Unit]
+Description=Disable dunst when i3lock is running
+After=dunst.service
+
+[Service]
+ExecStart=%h/opt/dunst-i3lock-tracker.sh
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+
