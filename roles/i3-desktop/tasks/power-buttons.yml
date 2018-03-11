@@ -1,0 +1,19 @@
+---
+- name: set behaviour on lid closing and power kye pressing
+  lineinfile:
+    dest: "/etc/systemd/logind.conf"
+    insertafter: "^\\[Login\\]$"
+    regexp: "^{{ item.attr }}=.*$"
+    line: "{{ item.attr }}={{ item.value }}"
+    backup: yes
+  with_items:
+    - { attr: HandleLidSwitch, value: lock }
+    - { attr: HandlePowerKey, value: suspend }
+  become: yes
+  register: logind_conf_file
+- name: restart systemd-logind
+  when: logind_conf_file.changed
+  systemd:
+    name: systemd-logind
+    state: restarted
+  become: yes
