@@ -32,3 +32,9 @@
 
 - name: Adjust power buttons behaviour
   import_tasks: power-buttons.yml
+
+- name: Install xinit.sh
+  copy:
+    src: xinit.sh
+    dest: "{{ ansible_user_dir }}/bin/xinit.sh"
+    backup: yes
