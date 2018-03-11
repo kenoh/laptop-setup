@@ -18,6 +18,7 @@
   copy:
     src: i3.config
     dest: "{{ ansible_user_dir }}/.config/i3/config"
+    mode: 0640
 - name: ensure .config/i3status dir exists
   file:
     path: "{{ ansible_user_dir }}/.config/i3status"
@@ -26,6 +27,7 @@
   copy:
     src: py3status.config
     dest: "{{ ansible_user_dir }}/.config/i3status/config"
+    mode: 0640
 
 - name: Set up xbacklight
   import_tasks: backlight.yml
@@ -37,4 +39,5 @@
   copy:
     src: xinit.sh
     dest: "{{ ansible_user_dir }}/bin/xinit.sh"
+    mode: 0770
     backup: yes
