@@ -9,6 +9,11 @@
     repo: "https://github.com/kenoh/{{ prog }}.git"
     dest: "{{ clone }}"
     force: yes
+- name: install requirements
+  pip:
+    requirements: "{{ clone }}/requirements.txt"
+    extra_args: --user
+    executable: pip3
 - name: symlink to ~/bin
   file:
     src: "{{ clone }}/{{ prog }}.py"
