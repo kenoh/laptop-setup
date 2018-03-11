@@ -4,3 +4,4 @@ dependencies:
   - { role: dunst-service }
   - { role: user-directories }
   - { role: arandr-autoconfig }
+  - { role: i3lock-setup }
