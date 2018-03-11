@@ -1,0 +1,6 @@
+---
+- name: Install packages with pip3
+  pip:
+    name: "{{ install_user_pip3_packages }}"
+    executable: pip3
+    extra_args: --user
