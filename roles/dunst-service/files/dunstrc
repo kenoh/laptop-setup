@@ -13,6 +13,7 @@
 	separator_height = 3
 	separator_color = frame
 	icon_position = left
+	max_icon_size = 32
 	padding = 3
 	horizontal_padding = 3
 	separator_height = 3
