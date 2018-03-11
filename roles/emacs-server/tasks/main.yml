@@ -22,3 +22,17 @@
     state: started
     no_block: yes
     user: yes
+- set_fact:
+    shortcuts_dir: "{{ ansible_user_dir }}/.local/share/applications"
+- name: ensure dir for .desktop files exists
+  file:
+    path: "{{ shortcuts_dir }}"
+    state: directory
+- name: install emacsclient shortcuts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ shortcuts_dir }}/{{ item }}"
+    backup: yes
+  with_items:
+    - emacsclient-new.desktop
+    - emacsclient-reuse.desktop
