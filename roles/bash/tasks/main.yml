@@ -1,0 +1,9 @@
+---
+- name: Install files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/{{ item }}"
+    backup: yes
+  with_items:
+    - .bashrc
+    - .inputrc
