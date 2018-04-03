@@ -5,9 +5,11 @@
     dest: /etc/udev/rules.d/90-backlight.rules
     backup: yes
   become: yes
+  register: rules
 - name: Trigger backlight udev rules
   command: udevadm trigger --action=add --subsystem-match=backlight
   become: yes
+  when: rules.changed
 
 - name: Clone wavexx/acpilight for xbacklight
   git:
