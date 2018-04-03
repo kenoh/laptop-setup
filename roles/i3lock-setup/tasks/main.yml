@@ -3,26 +3,21 @@
   package:
     name:
       - xss-lock
-      - xautolock
       - i3lock
     state: present
   become: yes
-- name: Install services
+- name: Install service
   vars:
     locker_command: i3lock -n -e -f -c 000000
   template:
-    src: "{{ item }}.service"
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/{{ item }}.service"
+    src: "xss-lock.service"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/xss-lock.service"
     backup: yes
-  with_items:
-    - xss-lock
-    - xautolock
-  register: service_files
-- name: Enable and (re)start the services
+  register: service_file
+- name: Enable and (re)start the service
   systemd:
-    name: "{{ item.item }}.service"
+    name: "xss-lock.service"
     daemon_reload: yes
     user: yes
     enabled: yes
-    state: "{{ 're' if item.changed else '' }}started"
-  with_items: "{{ service_files.results }}"
+    state: "{{ 're' if service_file.changed else '' }}started"

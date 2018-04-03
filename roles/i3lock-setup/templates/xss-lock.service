@@ -4,7 +4,7 @@ Documentation=man:xss-lock(1)
 After=display-manager.service
 
 [Service]
-ExecStart=/usr/bin/xss-lock -- {{ locker_command }}
+ExecStart=/usr/bin/xss-lock -v -n "notify-send -u critical -t 10000 -- 'Screen saver imminent.'" -- {{ locker_command }}
 Restart=always
 RestartSec=3
 

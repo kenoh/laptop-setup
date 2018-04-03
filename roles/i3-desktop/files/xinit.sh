@@ -15,8 +15,8 @@ xinputTouchpadId() {
 }
 
 main() {
-	xset dpms $(( 30 * 60 )) $(( 31 * 60 )) $(( 8 * 3600 ))
-	xset s $(( 5 * 60 ))
+	xset dpms 1800 7200 28800
+	xset s 270 300  # with xss-lock: notifier, then locker timeouts (not adding up)
 
 	setxkbmap us,sk ,qwerty grp:ctrls_toggle,ctrl:nocaps,compose:paus
 	xmodmap -e "keycode 37="
