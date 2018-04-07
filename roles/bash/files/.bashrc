@@ -43,8 +43,6 @@ alias tmux='TERM=xterm-256color tmux'
 alias e='emacsclient --no-wait -e "(select-frame-set-input-focus (selected-frame))" && emacsclient --no-wait'
 alias et='emacsclient --tty'
 
-which ssh-ident &>/dev/null && alias ssh="$(which ssh-ident)"
-
 gs() { git worktree list; git status $@; }
 alias ga='git add'
 alias gc='git commit'
