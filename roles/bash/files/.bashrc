@@ -18,7 +18,7 @@ _c_bold="\[\e[1m\]"
 _c_underline="\[\e[4m\]"
 _exit_status="$?"
 _current_datetime="$(date --iso-8601=seconds)"
-_xterm_title="\[\e]0;\w\007\]"
+[[ "$TERM" =~ ^xterm-.* ]] && _xterm_title="\[\e]0;\w\007\]"
 PS1="${_c_invert}${_exit_status}${_xterm_title}${_c_reset} ${_c_invert}\w${_c_reset} ${_current_datetime}\n${_c_invert}#${_c_reset} "
 
 alias rm='rm -i'
