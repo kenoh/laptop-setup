@@ -14,8 +14,16 @@
     requirements: "{{ clone }}/requirements.txt"
     extra_args: --user
     executable: pip3
-- name: symlink to ~/bin
-  file:
-    src: "{{ clone }}/{{ prog }}.py"
-    dest: "{{ ansible_user_dir }}/bin/{{ prog }}"
-    state: link
+- name: install service
+  copy:
+    src: "{{ prog }}.service"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/{{ prog }}.service"
+    backup: yes
+  register: service_file
+- name: Enable and start the service
+  systemd:
+    name: "{{ prog }}.service"
+    daemon_reload: yes
+    user: yes
+    enabled: yes
+    state: "{{ 're' if service_file.changed else '' }}started"
