@@ -5,6 +5,7 @@
   copy:
     src: "{{ name }}.sh"
     dest: "{{ ansible_user_dir }}/opt/{{ name }}.sh"
+    mode: 0500
     backup: yes
   register: script_file
 - name: Install service
