@@ -9,11 +9,13 @@
     repo: "https://github.com/kenoh/{{ prog }}.git"
     dest: "{{ clone }}"
     force: yes
+  register: repo
 - name: install requirements
   pip:
     requirements: "{{ clone }}/requirements.txt"
     extra_args: --user
     executable: pip3
+  when: repo.changed
 - name: install service
   copy:
     src: "{{ prog }}.service"
