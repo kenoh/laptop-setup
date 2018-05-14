@@ -3,7 +3,6 @@ Description=ARandR Autoconfig on display change
 After=display-manager.service
 
 [Service]
-ExecPre=/usr/bin/env
 ExecStart=%h/opt/arandr-autoconfig/arandr-autoconfig.py --post xinit.sh
 Restart=always
 RestartSec=3
