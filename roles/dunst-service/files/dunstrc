@@ -1,10 +1,10 @@
 [frame]
-    width = 1
-    color = "#383838"
+    width = 3
+    color = "#93a1a1"
 
 [global]
 	allow_markup = yes
-	format = "<b>%s</b>\n%b"
+	format = "<span size='large'><b>%s</b></span>\n<span size='medium'>%b</span>"
 	alignment = center
 	word_wrap = yes
 	ignore_newline = no
@@ -14,8 +14,8 @@
 	separator_color = frame
 	icon_position = left
 	max_icon_size = 32
-	padding = 3
-	horizontal_padding = 3
+	padding = 10
+	horizontal_padding = 10
 	separator_height = 3
 
 	monitor = 0
@@ -39,17 +39,17 @@
 	context = mod1+shift+period
 
 [urgency_low]
-    background = "#757A80"
-    foreground = "#DDD5C6"
+    background = "#073642"
+    foreground = "#c5dbe3"
     timeout = 0
 
 [urgency_normal]
-    background = "#D8CEBE"
-    foreground = "#332F2C"
+    background = "#586e75"
+    foreground = "#e3f1f1"
     timeout = 0
 
 [urgency_critical]
-    background = "#A73E28"
-    foreground = "#EDDEC9"
+    background = "#dc322f"
+    foreground = "#fff8e5"
     timeout = 0
 
