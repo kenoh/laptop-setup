@@ -48,3 +48,4 @@
     - emacs-server
     - fedora-codecs
     - spotify
+    - playerctl
