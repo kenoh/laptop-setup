@@ -19,17 +19,22 @@ class Role():
 
     def _file_changed(self, pull_file):
         target_file = self._get_target_file_path(pull_file)
-        pull_cont = sp.check_output(str(pull_file), shell=True, stderr=sp.PIPE).decode().splitlines(True)
-        target_cont = open(target_file).readlines()
-        diff = list(difflib.unified_diff(pull_cont, target_cont))
-        return diff
+        try:
+            new = sp.check_output(str(pull_file), shell=True, stderr=sp.PIPE).decode().splitlines(True)
+            old = open(target_file).readlines()
+            diff = list(difflib.unified_diff(old, new, fromfile=str(target_file), tofile="(new from running `%s')" % (str(pull_file)) ))
+            return diff
+        except sp.CalledProcessError as e:
+            print("## Could not run a .pull file, exception was: ", e)
+            return False
 
 
     def _do_process(self, cb):
         pull_files = list(pl.Path(self.role, 'files').glob('*.pull'))
         for pull_file in pull_files:
             diff = self._file_changed(pull_file)
-            cb(pull_file, diff)
+            if diff != False:
+                cb(pull_file, diff)
 
 
     def examine(self):
@@ -40,10 +45,16 @@ class Role():
 
     def _do_pull_file(self, pull_file):
         target_file = self._get_target_file_path(pull_file)
-        with open(target_file, 'wb') as target_fd:
-            pull_rc = sp.run(str(pull_file), shell=True, stdout=target_fd, stderr=sp.PIPE).returncode
-        if pull_rc != 0:
-            raise Exception('Could not run .pull file. Process returned %d. See above lines for stderr.' % pull_rc)
+        try:
+            with open(target_file, 'wb') as target_fd:
+                pull_rc = sp.run(str(pull_file), shell=True, stdout=target_fd, stderr=sp.PIPE).returncode
+                if pull_rc != 0:
+                    print("## Running the .pull file returned unexpected errno %d." % (pull_rc))
+                    return False
+        except sp.CalledProcessError as e:
+            print("## Could not run a .pull file, exception was: ", e)
+            return False
+        return True
 
 
     def pull(self):
