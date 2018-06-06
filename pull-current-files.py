@@ -25,7 +25,7 @@ class Role():
             diff = list(difflib.unified_diff(old, new, fromfile=str(target_file), tofile="(new from running `%s')" % (str(pull_file)) ))
             return diff
         except sp.CalledProcessError as e:
-            print("## Could not run a .pull file, exception was: ", e)
+            print("## %s: could not run the .pull file, exception was: " % (pull_file), e)
             return False
 
 
@@ -38,9 +38,9 @@ class Role():
 
 
     def examine(self):
-        def _examine(pull_file, diff):
+        def cb(pull_file, diff):
             print('## %s: up to date.' % pull_file.name if diff == [] else ''.join(diff))
-        return self._do_process(_examine)
+        return self._do_process(cb)
 
 
     def _do_pull_file(self, pull_file):
@@ -48,20 +48,23 @@ class Role():
         try:
             with open(target_file, 'wb') as target_fd:
                 pull_rc = sp.run(str(pull_file), shell=True, stdout=target_fd, stderr=sp.PIPE).returncode
-                if pull_rc != 0:
-                    print("## Running the .pull file returned unexpected errno %d." % (pull_rc))
+                if pull_rc == 0:
+                    print("## %s: changes pulled." % (pull_file))
+                    return True
+                else:
+                    print("## %s: running the .pull file returned unexpected errno %d." % (pull_file, pull_rc))
                     return False
         except sp.CalledProcessError as e:
-            print("## Could not run a .pull file, exception was: ", e)
+            print("## %s: could not run the .pull file, exception was: " % (pull_file), e)
             return False
-        return True
+        assert False, "shouldn't have gotten here"
 
 
     def pull(self):
-        def _pull(pull_file, diff):
+        def cb(pull_file, diff):
             if diff != []:
                 return self._do_pull_file(pull_file)
-        return self._do_process(_pull)
+        return self._do_process(cb)
 
 
 @click.command()
