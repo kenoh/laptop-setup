@@ -1,0 +1,14 @@
+---
+- set_fact:
+    svc: systemd-sync-environ
+- name: Install service
+  copy:
+    src: "{{ svc }}.service"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/{{ svc }}.service"
+    backup: yes
+- name: Enable the service
+  systemd:
+    name: "{{ svc }}.service"
+    daemon_reload: yes
+    user: yes
+    enabled: yes

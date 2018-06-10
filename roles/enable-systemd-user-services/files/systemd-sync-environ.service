@@ -1,0 +1,7 @@
+[Unit]
+Description=Wait for environ being updated from a Window Manager
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "while true; do test -n \"$MY_ENVIRON_SYNCED\" && unset MY_ENVIRON_SYNCED && exit 0; sleep 0.5; done; exit 1"
+TimeoutStartSec=10
