@@ -1,0 +1,20 @@
+---
+- name: install packages
+  package:
+    name: tilix
+    state: present
+  become: yes
+- name: create temp file for config
+  tempfile:
+    state: file
+  register: tmp
+- name: copy config dump to temporary location
+  copy:
+    src: config
+    dest: "{{ tmp.path }}"
+- name: update configuration
+  shell: "dconf load /com/gexperts/Tilix/ < '{{ tmp.path }}'"
+- name: remove temp file
+  file:
+    name: "{{ tmp.path }}"
+    state: absent

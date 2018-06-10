@@ -39,6 +39,7 @@
     - install-user-pip3-packages
     - bash
     - zsh
+    - tilix
     - i3-desktop
     - google-chrome
     - user-groups
