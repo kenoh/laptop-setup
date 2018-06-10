@@ -1,0 +1,42 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=99999
+SAVEHIST=99999
+setopt appendhistory autocd extendedglob nomatch
+unsetopt beep notify
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename "$HOME/.zshrc"
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+alias la='ll -a'
+alias sctl='systemctl --user'
+
+########################################################################
+# Oh-My-ZSH
+########################################################################
+
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export ZSH=$HOME/.oh-my-zsh
+# this below, otherwise completions tend to blink (due to 05 in it) :(
+export LS_COLORS="$(echo "$LS_COLORS" | sed -E 's/:mi=[0-9;]+/:mi=01;37/')"
+ZSH_THEME="juanghurtado"
+COMPLETION_WAITING_DOTS="true"
+CASE_SENSITIVE="false"
+HIST_STAMPS="yyyy-mm-dd"
+plugins=(
+    git
+    emacs
+    vagrant
+    docker
+)
+source $ZSH/oh-my-zsh.sh
+
+########################################################################
+
+# source zsh-syntax-highlighter must be the last line:
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

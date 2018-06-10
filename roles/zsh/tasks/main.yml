@@ -1,0 +1,17 @@
+---
+- name: install packages
+  package:
+    name:
+      - zsh
+      - zsh-syntax-highlighting
+    state: present
+  become: yes
+- name: clone oh-my-zsh repo
+  git:
+    repo: git://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh"
+- name: Install zshrc configuration
+  copy:
+    src: zshrc
+    dest: "{{ ansible_user_dir }}/.zshrc"
+    backup: yes

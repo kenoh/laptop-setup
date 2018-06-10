@@ -38,6 +38,7 @@
     - install-packages
     - install-user-pip3-packages
     - bash
+    - zsh
     - i3-desktop
     - google-chrome
     - user-groups
