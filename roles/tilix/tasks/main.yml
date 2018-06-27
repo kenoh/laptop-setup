@@ -21,13 +21,16 @@
   changed_when: diff.rc == 1
   failed_when: (diff.rc == 2) or diff.stderr
   check_mode: no
+- name: show changes
+  debug: var=diff.stdout_lines
+  when: diff.changed
 - name: apply new configuration
   block:
-    - name: create temp file for config
+    - name: create temp file for new config
       tempfile:
         state: file
       register: tmp
-    - name: copy config dump to temporary location
+    - name: copy new config dump to temporary location
       copy:
         src: config
         dest: "{{ tmp.path }}"
