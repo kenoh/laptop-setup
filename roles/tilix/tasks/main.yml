@@ -5,7 +5,9 @@
     cfg_file: "config"
 - name: install packages
   package:
-    name: tilix
+    name:
+      - tilix
+      - adobe-source-code-pro-fonts
     state: present
   become: yes
 - name: diff the configs
