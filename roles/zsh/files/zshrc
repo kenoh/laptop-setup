@@ -13,16 +13,12 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-alias la='ll -a'
-alias sctl='systemctl --user'
-
 ########################################################################
 # Oh-My-ZSH
 ########################################################################
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH=$HOME/.oh-my-zsh
-# this below, otherwise completions tend to blink (due to 05 in it) :(
 export LS_COLORS="$(echo "$LS_COLORS" | sed -E 's/:mi=[0-9;]+/:mi=01;37/')"
 ZSH_THEME="juanghurtado"
 COMPLETION_WAITING_DOTS="true"
@@ -32,11 +28,32 @@ plugins=(
     git
     emacs
     vagrant
-    docker
+	docker
 )
 source $ZSH/oh-my-zsh.sh
 
 ########################################################################
+
+alias la='ll -a'
+alias lt='ll -tr'
+alias d='colordiff -u'
+alias sctl='systemctl --user'
+dbr() {
+	set -x
+	NAME="$1"
+	test -n "$1" || return 100
+	docker build -t "$NAME" . && docker run -ti --rm=true --name="$NAME" "$NAME"
+}
+dex() {
+	set -x
+	NAME="$1"
+	test -n "$1" || return 100
+	docker exec -ti "$NAME" /bin/bash
+}
+alias dp='docker ps'
+alias dpa='docker ps --all'
+
+
 
 # source zsh-syntax-highlighter must be the last line:
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
