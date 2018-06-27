@@ -1,7 +1,18 @@
 ---
-- name: Install Docker
+- name: Ensure system Docker is absent
   package:
     name: docker
+    state: absent
+  become: yes
+- name: Add Docker-CE repo
+  copy:
+    src: docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+    backup: yes
+  become: yes
+- name: Install Docker CE packages
+  package:
+    name: docker-ce
     state: present
   become: yes
 - name: Ensure docker group exists
