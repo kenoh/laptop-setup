@@ -3,5 +3,5 @@ dependencies:
   - { role: enable-systemd-user-services }
   - { role: dunst-service }
   - { role: user-directories }
-  - { role: arandr-autoconfig }
+  # - { role: arandr-autoconfig }
   - { role: i3lock-setup }
