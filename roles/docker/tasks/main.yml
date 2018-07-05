@@ -15,6 +15,7 @@
     name: docker-ce
     state: present
   become: yes
+  ignore_errors: "{{ ansible_check_mode }}"
 - name: Ensure docker group exists
   group:
     name: docker
