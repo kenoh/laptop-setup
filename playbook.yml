@@ -25,6 +25,7 @@
       - python3-ipython
       - screen
       - strace
+      - the_silver_searcher
       - tilix
       - tig
       - tmux
