@@ -1,0 +1,10 @@
+[Unit]
+Description=Start keychain
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/keychain --quiet --systemd --agents ssh
+
+[Install]
+WantedBy=default.target

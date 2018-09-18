@@ -1,0 +1,22 @@
+---
+- set_fact:
+    svc: keychain.service
+- name: Install keychain
+  package:
+    name: keychain
+    state: present
+  become: yes
+- name: Install keychain service
+  # idea taken from https://eklitzke.org/down-the-ssh-auth-sock-rabbit-hole-a-gnome-adventure
+  copy:
+    src: "{{ svc }}"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/{{ svc }}"
+    backup: yes
+- name: enable and start service
+  systemd:
+    daemon_reload: yes
+    enabled: yes
+    name: "{{ svc }}"
+    state: started
+    no_block: yes
+    user: yes
