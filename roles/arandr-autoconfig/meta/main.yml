@@ -1,4 +1,0 @@
----
-dependencies:
-  - { role: user-directories }
-  - { role: enable-systemd-user-services }
