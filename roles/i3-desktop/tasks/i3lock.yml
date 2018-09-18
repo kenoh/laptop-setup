@@ -1,0 +1,11 @@
+---
+- name: Install packages
+  package:
+    name:
+      - xss-lock
+      - i3lock
+    state: present
+  become: yes
+
+- name: Check I will run
+  command: grep -q "^exec.*xss-lock" "{{ i3conf_path }}"

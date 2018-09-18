@@ -42,6 +42,9 @@
 - name: Set up dunst
   import_tasks: dunst.yml
 
+- name: Set up i3lock
+  import_tasks: i3lock.yml
+
 - name: Install xinit.sh
   copy:
     src: xinit.sh
