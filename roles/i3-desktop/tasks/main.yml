@@ -9,16 +9,20 @@
     state: present
   become: yes
 
-# configs
+- set_fact:
+    i3conf_dir: "{{ ansible_user_dir }}/.config/i3"
+- set_fact:
+    i3conf_path: "{{ i3conf_dir }}/config"
 - name: ensure .config/i3 dir exists
   file:
-    path: "{{ ansible_user_dir }}/.config/i3"
+    path: "{{ i3conf_dir }}"
     state: directory
 - name: copy i3 config
   copy:
     src: i3.config
-    dest: "{{ ansible_user_dir }}/.config/i3/config"
+    dest: "{{ i3conf_path }}"
     mode: 0640
+
 - name: ensure .config/i3status dir exists
   file:
     path: "{{ ansible_user_dir }}/.config/i3status"
@@ -34,6 +38,9 @@
 
 - name: Adjust power buttons behaviour
   import_tasks: power-buttons.yml
+
+- name: Set up dunst
+  import_tasks: dunst.yml
 
 - name: Install xinit.sh
   copy:
