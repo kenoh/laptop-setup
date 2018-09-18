@@ -1,5 +1,3 @@
 ---
 dependencies:
-  - { role: enable-systemd-user-services }
   - { role: user-directories }
-  - { role: i3lock-setup }
