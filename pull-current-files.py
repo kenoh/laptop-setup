@@ -22,7 +22,9 @@ class Role():
         try:
             new = sp.check_output(str(pull_file), shell=True, stderr=sp.PIPE).decode().splitlines(True)
             old = open(target_file).readlines()
-            diff = list(difflib.unified_diff(old, new, fromfile=str(target_file), tofile="(new from running `%s')" % (str(pull_file)) ))
+            diff = list(difflib.unified_diff(old, new,
+                                             fromfile="a/" + str(target_file),
+                                             tofile="b/" + str(target_file)) )
             return diff
         except sp.CalledProcessError as e:
             print("## %s: could not run the .pull file, exception was: " % (pull_file), e)
@@ -67,10 +69,26 @@ class Role():
         return self._do_process(cb)
 
 
+    def _do_write_diff_file(self, pull_file, diff):
+        target_file = pull_file.with_suffix(".pull.diff")
+        with open(target_file, 'wb') as fd:
+            fd.write("".join(diff).encode())
+            print("## %s: diff file written in %s." % (pull_file, target_file))
+        return True
+
+
+    def write_diffs(self):
+        def cb(pull_file, diff):
+            if diff != []:
+                return self._do_write_diff_file(pull_file, diff)
+        return self._do_process(cb)
+
+
+METHODS = {'overwrite': Role.pull, 'write-diffs': Role.write_diffs, 'examine': Role.examine }
 @click.command()
-@click.option('--force', '-f', is_flag=True, default=False, help='Actually pull the data. Otherwise only examination is performed.')
+@click.argument('method', required=False, type=click.Choice(METHODS.keys()), default='examine')
 @click.argument('role', nargs=-1, required=False, type=str)
-def main(force, role):
+def main(method, role):
     """Program for getting modified locally deployed files via Ansible roles back to the roles' trees for further availability to the user (usually to be versioned in git, etc.).
 
     Every script found at `roles/*/files/*.pull` will be run and its standard output (stdout) will be written to the respective (one without the .pull extension) file. You can either specify ROLEs explicitly or leave it blank so that all available roles are processed.
@@ -79,8 +97,8 @@ def main(force, role):
     > #!/bin/sh
     > cat ~/.config/foo.conf
     """
+    method = METHODS[method]
     roles_dir = pl.Path('roles')
-    method = Role.pull if force else Role.examine
     roles = [ Role(pl.Path(roles_dir, r)) for r in role ] if role else map(Role, list(roles_dir.iterdir()))
     for role_obj in roles:
         print('# %s' % role_obj)
