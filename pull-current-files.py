@@ -21,7 +21,11 @@ class Role():
         target_file = self._get_target_file_path(pull_file)
         try:
             new = sp.check_output(str(pull_file), shell=True, stderr=sp.PIPE).decode().splitlines(True)
-            old = open(target_file).readlines()
+            try:
+                old = open(target_file).readlines()
+            except FileNotFoundError as e:
+                print("## %s: tracked file not found at `%s`, expecting it being a new." % (pull_file, target_file))
+                old = []
             diff = list(difflib.unified_diff(old, new,
                                              fromfile="a/" + str(target_file),
                                              tofile="b/" + str(target_file)) )
