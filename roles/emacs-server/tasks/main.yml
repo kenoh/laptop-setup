@@ -4,19 +4,6 @@
     name: emacs
     state: present
   become: yes
-- name: install service
-  copy:
-    src: emacs.service
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/emacs.service"
-    backup: yes
-- name: enable and start service
-  systemd:
-    daemon_reload: yes
-    enabled: yes
-    name: emacs.service
-    state: started
-    no_block: yes
-    user: yes
 - set_fact:
     shortcuts_dir: "{{ ansible_user_dir }}/.local/share/applications"
 - name: ensure dir for .desktop files exists
