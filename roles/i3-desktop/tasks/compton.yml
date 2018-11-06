@@ -1,0 +1,13 @@
+---
+- name: Install package
+  package:
+    name: compton
+    state: present
+  become: yes
+- name: Place config file
+  copy:
+    src: compton.conf
+    dest: "{{ ansible_user_dir }}/.compton.conf"
+    backup: yes
+- name: Check I will run
+  command: grep -q "^exec.*compton" "{{ i3conf_path }}"
