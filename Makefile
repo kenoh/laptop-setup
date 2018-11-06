@@ -9,3 +9,6 @@ single:
 
 single-check:
 	ansible-playbook --ask-become-pass -i inventory.txt --diff --check single.yml
+
+clean:
+	git clean -Xf

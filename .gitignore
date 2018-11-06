@@ -1,2 +1,2 @@
-*.retry
-*.pull.diff
+/*.retry
+/roles/*/files/*.pull.diff
