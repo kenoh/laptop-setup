@@ -2,8 +2,6 @@
 HISTFILE=~/.histfile
 HISTSIZE=99999
 SAVEHIST=99999
-setopt appendhistory autocd extendedglob nomatch
-unsetopt beep notify
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -33,6 +31,9 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 ########################################################################
+
+unsetopt beep notify incappendhistory sharehistory
+setopt appendhistory autocd extendedglob nomatch
 
 alias la='ll -a'
 alias lt='ll -tr'
