@@ -1,12 +1,19 @@
 ---
 - set_fact:
-    name: dunst-i3lock-tracker
+    name: dunst-i3lock-tracker.sh
+- set_fact:
+    target: "{{ ansible_user_dir }}/opt/{{ name }}"
 - name: Install script
   copy:
-    src: "{{ name }}.sh"
-    dest: "{{ ansible_user_dir }}/opt/{{ name }}.sh"
+    src: "{{ name }}"
+    dest: "{{ target }}"
     mode: 0500
     backup: yes
+- name: Symlink to ~/bin
+  file:
+    state: link
+    src: "{{ target }}"
+    path: "~/bin/{{ name }}"
 
 - name: Check I will run
   command: grep -q "^exec.*{{ name }}" "{{ i3conf_path }}"
