@@ -86,12 +86,19 @@ class Role():
 
 METHODS = {'overwrite': Role.pull, 'write-diffs': Role.write_diffs, 'examine': Role.examine }
 @click.command()
-@click.argument('method', required=False, type=click.Choice(METHODS.keys()), default='examine')
+@click.argument('method', required=True, type=click.Choice(METHODS.keys()), default='examine')
 @click.argument('role', nargs=-1, required=False, type=str)
 def main(method, role):
     """Program for getting modified locally deployed files via Ansible roles back to the roles' trees for further availability to the user (usually to be versioned in git, etc.).
 
-    Every script found at `roles/*/files/*.pull` will be run and its standard output (stdout) will be written to the respective (one without the .pull extension) file. You can either specify ROLEs explicitly or leave it blank so that all available roles are processed.
+    Every script found at `roles/*/files/*.pull` will be run and, depending on the METHOD, its standard output (stdout) will be:
+    
+    \b
+    - printed to stdout (METHOD 'examine', the default)
+    - diffed against the respective tracked file and written to a nerby .pull.diff file (METHOD 'write-diffs')
+    - written to the respective tracked file overwriting it (METHOD 'overwrite')
+    
+    You can either specify ROLEs explicitly or leave it blank so that all available roles are processed.
 
     Simplest example of a .pull script could look like this:
     > #!/bin/sh
