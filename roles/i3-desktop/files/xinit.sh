@@ -19,7 +19,8 @@ main() {
 	xset s 1770 1800  # with xss-lock: notifier, then locker timeouts (not adding up)
 
 	setxkbmap us,sk ,qwerty grp:ctrls_toggle,ctrl:nocaps,compose:paus
-	xmodmap -e "keycode 37="
+	xmodmap -e "keycode 37="  # disable Left Control
+	xmodmap -e "pointer = 1 2 3 4 5 6 7 0 0"  # disable Back/Forward mouse scrollwheel buttons
 
 	if which synclient >/dev/null 2>&1; then
 		synclient TapButton1=1
