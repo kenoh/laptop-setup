@@ -35,17 +35,37 @@ source $ZSH/oh-my-zsh.sh
 unsetopt beep notify incappendhistory sharehistory
 setopt appendhistory autocd extendedglob nomatch
 
+alias al='alias | grep'
+cdg() {
+	local maybe_path="$(git rev-parse --show-toplevel)"
+	[ $? -eq 0 ] && cd "$maybe_path"
+}
 alias la='ll -a'
 alias lt='ll -tr'
 alias d='colordiff -u'
 alias sctl='systemctl --user'
+alias jctl='journalctl --user'
+dbuild() {
+	set -x
+	test -n "$1" || return 100
+	docker build .
+}
+drun() {
+	set -x
+	NAME="$1"
+	test -n "$1" || return 100
+	docker run -ti --rm=true "$NAME" /bin/bash
+}
 dbr() {
 	set -x
 	NAME="$1"
 	test -n "$1" || return 100
-	docker build -t "$NAME" . && docker run -ti --rm=true --name="$NAME" "$NAME"
+	docker build -t "$NAME" . && docker run -ti --rm=true --name="$NAME" "${@:2}" "$NAME"
 }
-dex() {
+dbr.() {
+	dbr "$(pwd | xargs basename)" "${@:1}"
+}
+dexec() {
 	set -x
 	NAME="$1"
 	test -n "$1" || return 100
@@ -53,6 +73,7 @@ dex() {
 }
 alias dp='docker ps'
 alias dpa='docker ps --all'
+alias tiga='tig --all'
 
 
 
