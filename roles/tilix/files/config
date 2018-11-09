@@ -1,17 +1,19 @@
 [/]
 new-window-inherit-state=true
 prompt-on-close=true
-use-tabs=true
+quake-specific-monitor=0
 quake-height-percent=90
 tab-position='top'
 copy-on-select=true
 sidebar-on-right=false
 terminal-title-style='small'
+bookmark-include-return=false
 window-state=128
 theme-variant='light'
 session-name='${title}'
 paste-advanced-default=false
 control-scroll-zoom=true
+use-tabs=true
 new-instance-mode='focus-window'
 enable-wide-handle=true
 app-title='${sessionName}'
@@ -27,11 +29,12 @@ warn-vte-config-issue=false
 list=['2b7c4080-0ddd-46c5-8f23-563fd3ba789d']
 
 [profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
-dim-transparency-percent=60
+dim-transparency-percent=45
 foreground-color='#000000000000'
 visible-name='Default'
 dim-color-set=false
 login-shell=true
+bold-is-bright=true
 palette=['#063541', '#DB312E', '#849900', '#B48800', '#258AD1', '#D23581', '#29A097', '#A3A39E9E9191', '#002A35', '#CA4A15', '#576D74', '#C1C17D7D1111', '#60608F8F9595', '#6B70C3', '#6363A1A1A1A1', '#BABABDBDB6B6']
 badge-color-set=false
 custom-command='zsh'
@@ -41,7 +44,7 @@ cursor-background-color='#F5F579790000'
 use-system-font=false
 cursor-colors-set=true
 highlight-colors-set=false
-use-theme-colors=true
+use-theme-colors=false
 use-custom-command=true
 bold-color-set=false
 font='Source Code Pro 10'
@@ -50,8 +53,8 @@ scrollback-unlimited=true
 terminal-bell='sound'
 notify-silence-threshold=10
 bold-color='#CCCC00000000'
-background-color='#FCF5E2'
-background-transparency-percent=4
+background-color='#EEEEEEEEECEC'
+background-transparency-percent=0
 badge-text=''
 terminal-title='${id}: ${title}'
 
