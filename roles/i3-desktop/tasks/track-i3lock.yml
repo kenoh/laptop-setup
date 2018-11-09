@@ -9,11 +9,6 @@
     dest: "{{ target }}"
     mode: 0500
     backup: yes
-- name: Symlink to ~/bin
-  file:
-    state: link
-    src: "{{ target }}"
-    path: "~/bin/{{ name }}"
 
 - name: Check I will run
   command: grep -q "^exec.*{{ name }}" "{{ i3conf_path }}"
