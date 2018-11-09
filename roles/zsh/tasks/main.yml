@@ -15,3 +15,7 @@
     src: zshrc
     dest: "{{ ansible_user_dir }}/.zshrc"
     backup: yes
+- name: Have custom scripts directory
+  file:
+    state: directory
+    path: "{{ ansible_user_dir }}/.zsh.d"
