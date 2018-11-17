@@ -48,7 +48,7 @@
     - disable-acpi-wakeups
     - vagrant
     - docker
-    - emacs-server
+    - emacs
     - fedora-codecs
     - spotify
     - playerctl
