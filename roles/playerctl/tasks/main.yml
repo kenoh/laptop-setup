@@ -1,31 +1,11 @@
 ---
-- set_fact:
-    user: acrisci
-    prog: playerctl
-    base: "{{ ansible_user_dir }}/opt"
-- set_fact:
-    clone: "{{ base }}/{{ prog }}"
-- name: clone repo
-  git:
-    repo: "https://github.com/{{ user }}/{{ prog }}.git"
-    dest: "{{ clone }}"
-    force: yes
-- name: install build deps
+- name: have repo
+  command: "yum copr enable -y mhonek/playerctl"
+  args:
+    creates: /etc/yum.repos.d/_copr_mhonek-playerctl.repo
+  become: yes
+- name: install playerctl
   package:
-    name:
-      - redhat-rpm-config
-      - gobject-introspection-devel
-      - gtk-doc
-      - libtool
+    name: playerctl
     state: present
   become: yes
-- name: build
-  shell: |
-    ./autogen.sh && make
-  args:
-    chdir: "{{ clone }}"
-- name: symlink to ~/bin
-  file:
-    src: "{{ clone }}/{{ prog }}/{{ prog }}"
-    dest: "{{ ansible_user_dir }}/bin/{{ prog }}"
-    state: link
