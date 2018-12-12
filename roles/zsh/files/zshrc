@@ -47,22 +47,24 @@ alias lt='ll -tr'
 alias d='colordiff -u'
 alias sctl='systemctl --user'
 alias jctl='journalctl --user'
+
+DOCKERNAME=docker
 dbuild() {
 	set -x
 	test -n "$1" || return 100
-	docker build .
+	$DOCKERNAME build .
 }
 drun() {
 	set -x
 	NAME="$1"
 	test -n "$1" || return 100
-	docker run -ti --rm=true "$NAME" /bin/bash
+	$DOCKERNAME run -ti --rm=true "$NAME" /bin/bash
 }
 dbr() {
 	set -x
 	NAME="$1"
 	test -n "$1" || return 100
-	docker build -t "$NAME" . && docker run -ti --rm=true --name="$NAME" "${@:2}" "$NAME"
+	$DOCKERNAME build -t "$NAME" . && $DOCKERNAME run -ti --rm=true --name="$NAME" "${@:2}" "$NAME"
 }
 dbr.() {
 	dbr "$(pwd | xargs basename)" "${@:1}"
@@ -71,10 +73,10 @@ dexec() {
 	set -x
 	NAME="$1"
 	test -n "$1" || return 100
-	docker exec -ti "$NAME" /bin/bash
+	$DOCKERNAME exec -ti "$NAME" /bin/bash
 }
-alias dp='docker ps'
-alias dpa='docker ps --all'
+alias dp='$DOCKERNAME ps'
+alias dpa='$DOCKERNAME ps --all'
 alias tiga='tig --all'
 
 # load scripts from a dir
