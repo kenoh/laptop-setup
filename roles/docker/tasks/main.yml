@@ -5,11 +5,14 @@
     state: absent
   become: yes
 - name: Add Docker-CE repo
-  copy:
-    src: docker-ce.repo
-    dest: /etc/yum.repos.d/docker-ce.repo
-    backup: yes
-  become: yes
+  block:
+    - set_fact:
+        backup_releasever: 28
+    - template:
+        src: docker-ce.repo
+        dest: /etc/yum.repos.d/docker-ce.repo
+        backup: yes
+      become: yes
 - name: Install Docker CE packages
   package:
     name: docker-ce
