@@ -31,7 +31,6 @@ plugins=(
     fedora
     fzf
     fasd
-    per-directory-history
 )
 source $ZSH/oh-my-zsh.sh
 
