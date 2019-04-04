@@ -19,7 +19,12 @@
     src: dunst-log.sh
     dest: "{{ ansible_user_dir }}/bin/dunst-log.sh"
     backup: yes
-- name: Check I will run
-  command: grep -q "^exec.*dunst" "{{ i3conf_path }}"
+- name: Enable and start the service
+  systemd:
+    name: dunst.service
+    daemon_reload: yes
+    user: yes
+    enabled: yes
+    state: started
 
 - include_tasks: track-i3lock.yml
