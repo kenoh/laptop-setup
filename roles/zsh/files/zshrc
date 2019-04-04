@@ -40,6 +40,7 @@ unsetopt beep notify incappendhistory sharehistory
 setopt appendhistory autocd extendedglob nomatch
 
 alias al='alias | grep'
+alias g='grep'
 cdg() {
 	local maybe_path="$(git rev-parse --show-toplevel)"
 	[ $? -eq 0 ] && cd "$maybe_path"
@@ -52,34 +53,40 @@ alias jctl='journalctl --user'
 
 DOCKERNAME=docker
 dbuild() {
-	set -x
-	test -n "$1" || return 100
-	$DOCKERNAME build .
+	set -x;	for x in NAME; do local "${x:-}"="${1:-}"; shift; done
+	$DOCKERNAME build -t "$NAME" .
 }
 drun() {
-	set -x
-	NAME="$1"
-	test -n "$1" || return 100
-	$DOCKERNAME run -ti --rm=true "$NAME" /bin/bash
+	set -x;	for x in NAME; do local "${x:-}"="${1:-}"; shift; done
+	$DOCKERNAME run -ti --rm=true "$NAME" "${@}"
 }
 dbr() {
-	set -x
-	NAME="$1"
-	test -n "$1" || return 100
-	$DOCKERNAME build -t "$NAME" . && $DOCKERNAME run -ti --rm=true --name="$NAME" "${@:2}" "$NAME"
+	set -x;	for x in NAME; do local "${x:-}"="${1:-}"; shift; done
+	dbuild "$NAME" . && drun "$NAME" "${@}"
+}
+dbrp() {
+	set -x;	for x in NAME PORT; do local "${x:-}"="${1:-}"; shift; done
+	dbuild "$NAME" . && drun -p "$PORT" "$NAME" "${@}"
+}
+dbrp.() {
+	set -x;	for x in PORT; do local "${x:-}"="${1:-}"; shift; done
+	dbrp "$(pwd | xargs basename)" "$PORT" "${@}"
 }
 dbr.() {
-	dbr "$(pwd | xargs basename)" "${@:1}"
+	set -x;	for x in DUMMY; do local "${x:-}"="${1:-}"; shift; done
+	dbr "$(pwd | xargs basename)" "${@}"
 }
 dexec() {
-	set -x
-	NAME="$1"
-	test -n "$1" || return 100
-	$DOCKERNAME exec -ti "$NAME" /bin/bash
+	set -x;	for x in NAME; do local "${x:-}"="${1:-}"; shift; done
+	$DOCKERNAME exec -ti "$NAME" "${@}"
 }
 alias dp='$DOCKERNAME ps'
 alias dpa='$DOCKERNAME ps --all'
 alias tiga='tig --all'
+
+gdcommits() {
+	d <(git show "$1") <(git show "$2")
+}
 
 # load scripts from a dir
 fpath=(~/.zsh.d/ $fpath)
