@@ -14,6 +14,11 @@
     dest: "{{ ansible_user_dir }}/.config/dunst/dunstrc"
     backup: yes
   register: dunst_config_file
+- name: Place logging script
+  copy:
+    src: dunst-log.sh
+    dest: "{{ ansible_user_dir }}/bin/dunst-log.sh"
+    backup: yes
 - name: Check I will run
   command: grep -q "^exec.*dunst" "{{ i3conf_path }}"
 
