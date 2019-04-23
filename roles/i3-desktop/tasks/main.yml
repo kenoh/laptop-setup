@@ -51,3 +51,10 @@
     dest: "{{ ansible_user_dir }}/bin/xinit.sh"
     mode: 0770
     backup: yes
+
+- name: Set up .Xresources
+  copy:
+    src: Xresources
+    dest: "{{ ansible_user_dir }}/.Xresources"
+    mode: 0660
+    backup: yes
