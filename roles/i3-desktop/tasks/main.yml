@@ -58,3 +58,8 @@
     dest: "{{ ansible_user_dir }}/.Xresources"
     mode: 0660
     backup: yes
+  register: xresources_file
+- name: Reload Xresources
+  command: xrdb "{{ ansible_user_dir }}/.Xresources"
+  check_mode: no
+  when: xresources_file.changed

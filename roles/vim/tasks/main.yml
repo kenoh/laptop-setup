@@ -1,5 +1,6 @@
+---
 - name: Install nvim
-  pacakge:
+  package:
     name: neovim
     state: present
   become: yes
