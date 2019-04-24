@@ -39,6 +39,8 @@ source $ZSH/oh-my-zsh.sh
 unsetopt beep notify incappendhistory sharehistory
 setopt appendhistory autocd extendedglob nomatch
 
+alias vim=nvim
+
 alias al='alias | grep'
 alias g='grep'
 cdg() {
