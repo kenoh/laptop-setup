@@ -1,0 +1,5 @@
+- name: Install urxvt
+  package:
+    name: rxvt-unicode
+    state: present
+  become: yes

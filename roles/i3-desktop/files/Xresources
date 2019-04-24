@@ -1,3 +1,6 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!! solarized
+
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -16,7 +19,8 @@
 #define S_cyan          #2aa198
 #define S_green         #859900
 
-*background:            S_base3
+#define BACKGROUND	S_base3
+*background:            BACKGROUND
 *foreground:            S_base00
 *fadeColor:             S_base3
 *cursorColor:           S_red
@@ -64,3 +68,63 @@ i3wm.urgentFg: S_base3
 *color7:                S_base2
 *color15:               S_base3
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Tomorrow
+
+#define BACKGROUND	#fafafa
+
+*foreground:   #4d4d4c
+*background:   BACKGROUND
+! CursorColor (Selection)
+*cursorColor:  #d6d6d6
+
+! Black + Grey (Comment)
+*color0:       #000000
+*color8:       #8e908c
+! Red + Bright Red
+*color1:       #c82829
+*color9:       #ff3334
+! Green + Bright Green
+*color2:       #718c00
+*color10:      #9ec400
+! Yellow (Orange) + Bright Yellow (Yellow)
+*color3:       #f5871f
+*color11:      #eab700
+! Blue + Bright Blue
+*color4:       #4271ae
+*color12:      #5795e6
+! Magenta (Purple) + Bright Magenta
+*color5:       #8959a8
+*color13:      #b777e0
+! Cyan (Aqua) + Bright Cyan
+*color6:       #3e999f
+*color14:      #54ced6
+! Light Grey (Selection) + White (Current Line)
+*color7:       #d6d6d6
+*color15:      #efefef
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+URxvt.intensityStyles:	false
+URxvt.background:       BACKGROUND
+URxvt.depth:		32
+URxvt.font: 		xft:Inconsolata:size=12
+URxvt.scrollBar:	false
+URxvt.cursorColor:	orange
+
+!! Extensions
+URxvt.perl-ext-common:	default,matcher,resize-font,url-select,keyboard-select
+URxvt.colorUL:		#4682B4
+!! url-select
+URxvt.keysym.M-u:	perl:url-select:select_next
+URxvt.url-select.launcher: linkhandler
+URxvt.url-select.underline: true
+!! keyboard-select:
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+!! resize-font
+URxvt.resize-font.smaller:	C-Down
+URxvt.resize-font.bigger:	C-Up
+!! Matcher
+URxvt.url-launcher:	linkhandler
+URxvt.matcher.button:	1
