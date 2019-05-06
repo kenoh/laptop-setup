@@ -4,10 +4,3 @@
     name: neovim
     state: present
   become: yes
-
-- name: Have vimrc
-  copy:
-    src: vimrc
-    dest: "{{ ansible_user_dir }}/.vimrc"
-    mode: 0660
-    backup: yes

@@ -1,0 +1,20 @@
+---
+- name: set fact dotfiles_dir
+  set_fact:
+    dotfiles_dir: "{{ ansible_user_dir }}/dotfiles"
+- name: clone repo
+  git:
+    repo: "{{ dotfiles_repo }}"
+    dest: "{{ dotfiles_dir }}"
+    update: no
+- name: ensure stow is available
+  package:
+    name: stow
+    state: present
+  become: yes
+- name: stow requested
+  command: stow "{{ item }}"
+  args:
+    chdir: "{{ dotfiles_dir }}"
+  with_items: "{{ stow }}"
+  when: stow is defined
