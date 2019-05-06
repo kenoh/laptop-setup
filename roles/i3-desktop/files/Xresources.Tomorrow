@@ -1,0 +1,25 @@
+#define BACKGROUND	#fafafa
+#define FOREGROUND  #4d4d4c
+#define CURSOR_COLOR  #d6d6d6
+
+*foreground:   FOREGROUND
+*background:   BACKGROUND
+! CursorColor (Selection)
+*cursorColor:  CURSOR_COLOR
+
+#define BLKd      #000000
+#define BLKl      #8e908c
+#define REDd      #c82829
+#define REDl      #ff3334
+#define GRNd      #718c00
+#define GRNl      #9ec400
+#define YLWd      #f5871f
+#define YLWl      #eab700
+#define BLUd      #4271ae
+#define BLUl      #5795e6
+#define MAGd      #8959a8
+#define MAGl      #b777e0
+#define CYAd      #3e999f
+#define CYAl      #54ced6
+#define WHTd      #d6d6d6
+#define WHTl      #eaeaea
