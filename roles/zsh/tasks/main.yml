@@ -12,11 +12,6 @@
     repo: git://github.com/robbyrussell/oh-my-zsh.git
     dest: "{{ ansible_user_dir }}/.oh-my-zsh"
     update: no  # oh-my-zsh has auto-update
-- name: Install zshrc configuration
-  copy:
-    src: zshrc
-    dest: "{{ ansible_user_dir }}/.zshrc"
-    backup: yes
 - name: Have custom scripts directory
   file:
     state: directory
