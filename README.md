@@ -1,6 +1,6 @@
 Requirements
 ============
-- Fedora (latest stable, currently 27)
+- Fedora (latest stable)
 - Ansible (`dnf install ansible`)
 
 Usage
