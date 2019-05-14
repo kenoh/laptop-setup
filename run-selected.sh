@@ -16,6 +16,6 @@ $(echo ${@} | sed 's/ /\n/g' | sed 's/^/    - /')
 EOF
 
 ansible-playbook --ask-become-pass -i inventory.txt --diff ${CHECK+--check} ${VERBOSE} "$FN" \
-	|| rm "$FN" "$FNR" && exit 1
+	|| { rm "$FN" "$FNR" ; exit 1 ; }
 
 rm "$FN"
