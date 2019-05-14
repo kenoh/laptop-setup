@@ -1,4 +1,9 @@
 ---
+- name: have own custom repo
+  command: "yum copr enable -y mhonek/redshift"
+  args:
+    creates: /etc/yum.repos.d/_copr_mhonek-redshift.repo
+  become: yes
 - name: Have packages
   package:
     name: redshift
