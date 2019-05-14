@@ -1,0 +1,35 @@
+---
+- name: Ensure packages present
+  package:
+    name:
+      - ack
+      - acpi
+      - arandr
+      - autoconf
+      - automake
+      - colordiff
+      - ctags
+      - emacs
+      - feh
+      - firefox
+      - gdb
+      - gimp
+      - git
+      - global-ctags
+      - htop
+      - mc
+      - mercurial
+      - nmap
+      - python2-ipython
+      - python3-ipython
+      - screen
+      - strace
+      - the_silver_searcher
+      - tilix
+      - tig
+      - tmux
+      - wireshark
+      - python-xdot
+      - yum-utils
+    state: present
+  become: true

@@ -2,43 +2,11 @@
 - hosts: localhost
   become_user: root
   vars:
-    install_packages:
-      - ack
-      - acpi
-      - arandr
-      - autoconf
-      - automake
-      - colordiff
-      - ctags
-      - emacs
-      - feh
-      - firefox
-      - gdb
-      - gimp
-      - git
-      - global-ctags
-      - htop
-      - mc
-      - mercurial
-      - nmap
-      - python2-ipython
-      - python3-ipython
-      - screen
-      - strace
-      - the_silver_searcher
-      - tilix
-      - tig
-      - tmux
-      - vim
-      - wireshark
-      - python-xdot
-      - yum-utils
     dotfiles_repo: git@github.com:kenoh/dotfiles.git
   roles:
     - install-packages
     - bash
     - zsh
-    - tilix
     - i3-desktop
     - redshift
     - google-chrome
