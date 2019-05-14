@@ -4,7 +4,7 @@
     dotfiles_dir: "{{ ansible_user_dir }}/dotfiles"
 - name: clone repo
   git:
-    repo: "{{ dotfiles_repo }}"
+    repo: "git@github.com:kenoh/dotfiles.git"
     dest: "{{ dotfiles_dir }}"
     update: no
 - name: ensure stow is available
