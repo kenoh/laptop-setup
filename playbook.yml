@@ -33,12 +33,9 @@
       - wireshark
       - python-xdot
       - yum-utils
-    install_user_pip3_packages:
-      - ansible-container
     dotfiles_repo: git@github.com:kenoh/dotfiles.git
   roles:
     - install-packages
-    - install-user-pip3-packages
     - bash
     - zsh
     - tilix
