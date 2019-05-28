@@ -4,7 +4,6 @@
     name:
       - zsh
       - zsh-syntax-highlighting
-      - fasd
     state: present
   become: yes
 - name: clone oh-my-zsh repo
