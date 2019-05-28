@@ -1,0 +1,28 @@
+---
+- name: Install packages
+  package:
+    name:
+      - git
+      - tig
+    state: present
+  become: yes
+
+- name: Configure Git user.name
+  git_config:
+    name: user.name
+    scope: global
+    value: "{{ real_name }}"
+
+- name: Configure Git user.email
+  git_config:
+    name: user.email
+    scope: global
+    value: "{{ email_address }}"
+
+- name: Configure Git pull.rebase
+  git_config:
+    name: pull.rebase
+    scope: global
+    value: true
+
+
