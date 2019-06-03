@@ -2,11 +2,11 @@
 - hosts: localhost
   become_user: root
   roles:
-    - install-packages
+    - additional-packages
+    - devel
+    - devel-ui
     - bash
     - zsh
-    - i3-desktop
-    - redshift
     - google-chrome
     - user-groups
     - fedora-packaging
@@ -16,4 +16,3 @@
     - emacs
     - fedora-codecs
     - spotify
-    - playerctl

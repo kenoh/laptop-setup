@@ -1,0 +1,24 @@
+---
+- name: Ensure packages present
+  package:
+    name:
+      - ack
+      - colordiff
+      - ctags
+      - emacs-nox
+      - gdb
+      - git
+      - global-ctags
+      - htop
+      - mc
+      - mercurial
+      - nmap
+      - python3-ipython
+      - screen
+      - strace
+      - the_silver_searcher
+      - tig
+      - tmux
+      - "{{ 'dnf-utils' if ansible_distribution == 'Fedora' else 'yum-utils' }}"
+    state: present
+  become: true

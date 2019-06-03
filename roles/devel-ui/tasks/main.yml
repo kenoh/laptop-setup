@@ -2,11 +2,7 @@
 - name: Ensure packages present
   package:
     name:
-      - acpi
-      - arandr
-      - feh
-      - firefox
-      - gimp
-      - tilix
+      - emacs
+      - wireshark
     state: present
   become: true
