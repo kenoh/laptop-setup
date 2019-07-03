@@ -1,11 +1,17 @@
 ---
-- name: install packages
+- name: install package
   package:
     name:
       - zsh
+    state: present
+  become: yes
+- name: install syntax highlighting
+  package:
+    name:
       - zsh-syntax-highlighting
     state: present
   become: yes
+  when: ansible_distribution == 'Fedora'
 - name: clone oh-my-zsh repo
   git:
     repo: git://github.com/robbyrussell/oh-my-zsh.git

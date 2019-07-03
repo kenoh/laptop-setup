@@ -9,10 +9,18 @@
     update: no
     accept_hostkey: yes
 - name: ensure stow is available
-  package:
-    name: stow
-    state: present
-  become: yes
+  block:
+    - name: install epel
+      package:
+        name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        state: present
+      become: yes
+      when: (ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat') and ansible_distribution_major_version == '7'
+    - name: install stow
+      package:
+        name: stow
+        state: present
+      become: yes
 - name: stow requested
   command: stow "{{ item }}"
   args:
