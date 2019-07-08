@@ -19,6 +19,12 @@
     scope: global
     value: "{{ email_address }}"
 
+- name: Configure Git user.email
+  git_config:
+    name: color.ui
+    scope: global
+    value: auto
+
 - name: Configure Git pull.rebase
   git_config:
     name: pull.rebase
