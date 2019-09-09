@@ -21,3 +21,5 @@
   file:
     state: directory
     path: "{{ ansible_user_dir }}/.zsh.d"
+- name: Have fzf
+  include_tasks: fzf.yml
