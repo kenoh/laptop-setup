@@ -1,0 +1,5 @@
+---
+- name: Clone repo
+  git:
+    repo: https://github.com/sindresorhus/pure.git
+    dest: "{{ ansible_user_dir }}/.zsh.d/pure"

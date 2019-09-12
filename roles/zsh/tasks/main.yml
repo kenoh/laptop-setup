@@ -23,3 +23,5 @@
     path: "{{ ansible_user_dir }}/.zsh.d"
 - name: Have fzf
   include_tasks: fzf.yml
+- name: Have pure prompt
+  include_tasks: pure-prompt.yml
