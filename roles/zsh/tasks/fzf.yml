@@ -5,3 +5,4 @@
       - fzf
     state: present
   become: yes
+  when: ansible_distribution == 'Fedora'
