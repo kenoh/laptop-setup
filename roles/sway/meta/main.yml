@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: dotfiles
+    vars:
+      stow: sway
