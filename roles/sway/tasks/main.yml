@@ -14,5 +14,7 @@
       - swayidle
       - swaylock
       - mako
+      - rofi
+      - kanshi
     state: present
   become: yes
