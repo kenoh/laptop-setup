@@ -22,7 +22,7 @@
         state: present
       become: yes
 - name: stow requested
-  command: stow "{{ item }}"
+  command: ./stow.sh "{{ item }}"
   args:
     chdir: "{{ dotfiles_dir }}"
   with_items: "{{ stow }}"
