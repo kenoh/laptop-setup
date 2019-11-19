@@ -14,7 +14,10 @@
       - swayidle
       - swaylock
       - mako
-      - rofi
+      - bemenu
       - kanshi
+      - grim
+      - slurp
+      - waybar
     state: present
   become: yes
