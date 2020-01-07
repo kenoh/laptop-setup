@@ -4,10 +4,15 @@ set -x
 FN="test.yml"
 FNR="test.retry"
 
-test -f "$FN" && (
+test $# -gt 0 || {
+  echo "Not enough arguments. Please, provide roles' names as arguments."
+  exit 1
+}
+
+test -f "$FN" && {
   echo "Found test.yml file. Is it yours? If so, remove it before running again. Thanks!"
   exit 1
-)
+}
 
 cat > "$FN" <<EOF
 ---
