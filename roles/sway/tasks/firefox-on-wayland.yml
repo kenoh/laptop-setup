@@ -1,0 +1,11 @@
+---
+- name: Install firefox-wayland metapackage
+  package:
+    name: firefox-wayland
+  become: yes
+
+- name: Have the hacked wayland .desktop files in place
+  copy:
+    remote_src: yes
+    src: /usr/share/applications/firefox-wayland.desktop
+    dest: "{{ ansible_user_dir }}/.local/share/applications/firefox.desktop"

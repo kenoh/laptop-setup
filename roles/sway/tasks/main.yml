@@ -21,3 +21,5 @@
       - waybar
     state: present
   become: yes
+
+- include: firefox-on-wayland.yml
