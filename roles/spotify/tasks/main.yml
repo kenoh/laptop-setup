@@ -13,3 +13,8 @@
     name: spotify
     state: present
   become: yes
+
+- name: Add custom .desktop file
+  copy:
+    src: spotify.desktop
+    dest: "{{ ansible_user_dir }}/.local/share/applications/"
