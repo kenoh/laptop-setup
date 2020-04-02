@@ -1,0 +1,9 @@
+---
+- name: Ensure PA's config dir exists
+  file:
+    path: "{{ pa_conf_dir }}"
+    state: directory
+- name: Install PA's user config
+  copy:
+    src: default.pa
+    dest: "{{ pa_conf }}"
