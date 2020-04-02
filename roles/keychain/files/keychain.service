@@ -4,7 +4,7 @@ Description=Start keychain
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-ExecStart=/usr/bin/keychain --quiet --systemd --agents ssh
+ExecStart=/usr/bin/keychain --quiet --systemd --timeout 720 --agents ssh
 
 [Install]
 WantedBy=default.target
