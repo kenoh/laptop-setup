@@ -1,0 +1,12 @@
+---
+- name: install emacs
+  package:
+    name: emacs
+    state: present
+  become: yes
+- name: clone spacemacs repo
+  git:
+    repo: https://github.com/syl20bnr/spacemacs
+    dest: "{{ ansible_user_dir }}/.emacs.d/"
+    version: develop
+    update: no
