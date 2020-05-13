@@ -25,3 +25,8 @@
   include_tasks: fzf.yml
 - name: Have pure prompt
   include_tasks: pure-prompt.yml
+- name: Make ZSH the default shell
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: "/usr/bin/zsh"
+  become: yes
