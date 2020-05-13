@@ -4,8 +4,9 @@
 (use-modules ((ice-9 getopt-long) #:select (getopt-long option-ref))
              ((ice-9 popen) #:select (open-pipe* close-pipe)))
 
-(define roles (option-ref (getopt-long (command-line) '())
-                          '() '()))
+(define option-spec '((check (single-char #\c) (value #f))))
+(define check (option-ref (getopt-long (command-line) option-spec) 'check #f))
+(define roles (option-ref (getopt-long (command-line) option-spec) '() '()))
 
 (define (prep-yml roles)
     (with-output-to-file "test.yml"
@@ -21,7 +22,11 @@
     (system* "rm" "test.retry"))
 
 (define (play)
-    (system* "ansible-playbook" "-i" "inventory.txt" "--ask-become-pass" "test.yml"))
+    (let ((cmd (append '("ansible-playbook" "-i" "inventory.txt" "--ask-become-pass")
+                       (if check '("--check") '())
+                       '("test.yml"))))
+     (display cmd)(display "\n")
+     (apply system* cmd)))
 
 (define (my-assert bool msg)
     (unless bool
