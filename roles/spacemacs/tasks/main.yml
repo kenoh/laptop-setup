@@ -10,3 +10,9 @@
     dest: "{{ ansible_user_dir }}/.emacs.d/"
     version: develop
     update: no
+- name: Maybe install default layers.el from example
+  copy:
+    remote_src: yes
+    src: "{{ ansible_user_dir }}/.spacemacs.d/layers.el-example"
+    dest: "{{ ansible_user_dir }}/.spacemacs.d/layers.el"
+    force: no
