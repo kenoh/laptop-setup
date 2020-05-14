@@ -6,7 +6,7 @@
   git:
     repo: "git@github.com:kenoh/dotfiles.git"
     dest: "{{ dotfiles_dir }}"
-    update: no
+    update: yes
     accept_hostkey: yes
 - name: ensure stow is available
   block:
