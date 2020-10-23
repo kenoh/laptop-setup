@@ -9,16 +9,16 @@
 - name: Install packages
   package:
     name:
+      - bemenu
+      - grim
+      - kanshi
+      - mako
+      - slurp
       - sway
       - swaybg
       - swayidle
       - swaylock
-      - mako
-      - bemenu
-      - kanshi
-      - grim
-      - slurp
-      - waybar
+      - xdg-desktop-portal-wlr
     state: present
   become: yes
 
