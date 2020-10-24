@@ -1,0 +1,16 @@
+---
+- name: Have the repo
+  yum_repository:
+    name: "datovka"
+    description: "Datovka od CZ.NIC"
+    baseurl: https://download.opensuse.org/repositories/home:/CZ-NIC:/datovka-latest/Fedora_$releasever/
+    enabled: yes
+    gpgkey: https://download.opensuse.org/repositories/home:/CZ-NIC:/datovka-latest/Fedora_$releasever/repodata/repomd.xml.key
+  become: yes
+
+- name: Install packages
+  package:
+    name:
+      - datovka
+    state: present
+  become: yes
