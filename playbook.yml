@@ -7,14 +7,16 @@
     - devel-ui
     - bash
     - zsh
-    - fix-pulseaudio-popping-sound
-    - google-chrome
+    #- fix-pulseaudio-popping-sound
+    #- google-chrome
     - user-groups
-    - fedora-packaging
-    - disable-acpi-wakeups
+    #- fedora-packaging
+    #- disable-acpi-wakeups
     - vagrant
     - docker
     - emacs
     - fedora-codecs
     - spotify
     - datovka
+    - spacemacs
+    - vim
