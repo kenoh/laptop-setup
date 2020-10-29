@@ -13,12 +13,8 @@
 - name: install codecs and VLC
   package:
     name:
-      - gstreamer-plugins-base
       - gstreamer1-plugins-base
-      - gstreamer-plugins-bad
-      - gstreamer-plugins-ugly
       - gstreamer1-plugins-ugly
-      - gstreamer-plugins-good-extras
       - gstreamer1-plugins-good-extras
       - gstreamer1-plugins-bad-freeworld
       - ffmpeg
