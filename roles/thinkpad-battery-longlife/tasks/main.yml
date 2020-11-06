@@ -1,0 +1,17 @@
+---
+- name: install tlp
+  package:
+    name: tlp
+    state: present
+  become: yes
+
+- name: set charging tresholds
+  lineinfile:
+    path: "/etc/tlp.conf"
+    regexp: "{{ item[1].what }}{{ item[0] }}="
+    value: "{{ item[1].what }}{{ item[0] }}={{ item[1].value }}"
+  with_nested:
+    - [0, 1]
+    - [ {'what': 'START_CHARGE_THRESH_BAT', 'value': '75'},
+        {'what': 'STOP_CHARGE_THRESH_BAT', 'value': '80'} ]
+  become: yes
