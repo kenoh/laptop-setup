@@ -3,20 +3,21 @@
   become_user: root
   roles:
     - additional-packages
+    - bash
+    - datovka
     - devel
     - devel-ui
-    - bash
-    - zsh
-    #- fix-pulseaudio-popping-sound
-    #- google-chrome
-    - user-groups
-    #- fedora-packaging
     #- disable-acpi-wakeups
-    - vagrant
     - docker
     - emacs
     - fedora-codecs
-    - spotify
-    - datovka
+    #- fedora-packaging
+    #- fix-pulseaudio-popping-sound
+    #- google-chrome
     - spacemacs
+    - spotify
+    - thinkpad-battery-longlife
+    - user-groups
+    - vagrant
     - vim
+    - zsh
