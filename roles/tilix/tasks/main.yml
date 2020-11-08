@@ -3,6 +3,7 @@
     dump_cmd: "dconf dump /com/gexperts/Tilix/"
     load_cmd: "dconf load /com/gexperts/Tilix/"
     cfg_file: "config"
+
 - name: install packages
   package:
     name:
@@ -10,6 +11,7 @@
       - adobe-source-code-pro-fonts
     state: present
   become: yes
+
 - name: diff the configs
   shell:
     cmd: |
@@ -23,9 +25,11 @@
   changed_when: diff.rc == 1
   failed_when: (diff.rc == 2) or diff.stderr
   check_mode: no
+
 - name: show changes
   debug: var=diff.stdout_lines
   when: diff.changed
+
 - name: apply new configuration
   block:
     - name: create temp file for new config
