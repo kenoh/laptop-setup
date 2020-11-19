@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Spotify (--url handler)
-Icon=spotify-client
+Icon=spotify
 TryExec=spotify
 Exec=spotify --url=%U
 Terminal=false
