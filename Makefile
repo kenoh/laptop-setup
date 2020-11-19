@@ -6,3 +6,8 @@ check:
 
 clean:
 	git clean -Xf
+
+deps:
+	python3 -m venv .venv
+	. .venv/bin/activate
+	pip install -r requirements.txt

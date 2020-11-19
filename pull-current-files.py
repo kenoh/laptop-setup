@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import pathlib as pl
 import click
 import subprocess as sp
