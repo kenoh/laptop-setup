@@ -1,2 +1,3 @@
 /*.retry
 /roles/*/files/*.pull.diff
+/.venv/
