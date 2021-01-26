@@ -19,7 +19,18 @@
       - swayidle
       - swaylock
       - xdg-desktop-portal-wlr
+      # for the swaybar
+      - py3status
+      - python3-pydbus   # for bluetooth module
+      - light   # for brightness controll
     state: present
   become: yes
+
+- name: Install pip3 package
+  pip:
+    name:
+      - pulsemixer
+    executable: pip3
+    extra_args: --user
 
 - include: firefox-on-wayland.yml
