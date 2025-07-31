@@ -1,0 +1,5 @@
+---
+- name: Install
+  package:
+    name: kitty
+  become: true
