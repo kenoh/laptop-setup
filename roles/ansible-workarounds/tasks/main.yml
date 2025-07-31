@@ -1,0 +1,15 @@
+---
+- name: Missing dep on Fedora 41+ for *package* module
+  when:
+    - ansible_distribution == 'Fedora'
+    - (ansible_distribution_major_version | int) >= 41
+  block:
+    - name: Check presence
+      command: rpm -qi python3-libdnf5
+      changed_when: false
+      check_mode: false
+      register: res
+    - name: Install
+      command: dnf -y install python3-libdnf5
+      become: true
+      when: res.rc != 0
