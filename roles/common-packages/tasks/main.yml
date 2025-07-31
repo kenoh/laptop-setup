@@ -1,0 +1,9 @@
+---
+- name: Install
+  package:
+    name:
+      - git
+      - mc
+      - vim
+      - python3-pip
+  become: true
