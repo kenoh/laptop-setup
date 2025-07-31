@@ -1,0 +1,22 @@
+---
+- name: Have config dir
+  file:
+    path: /etc/systemd/logind.conf.d
+    state: directory
+  become: true
+
+- name: set behaviour on lid closing and power key pressing
+  copy:
+    dest: "/etc/systemd/logind.conf.d/10-kenoh.conf"
+    content: |
+      [Login]
+      HandleLidSwitch=lock
+      HandlePowerKey=suspend
+  become: yes
+  register: logind_conf_file
+- name: restart systemd-logind
+  when: logind_conf_file.changed
+  systemd:
+    name: systemd-logind
+    state: reloaded
+  become: yes
