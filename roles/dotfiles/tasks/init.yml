@@ -1,0 +1,25 @@
+---
+- name: Install deps
+  package:
+    name:
+      - git
+      - stow
+  become: true
+
+- name: clone repo
+  git:
+    repo: "git@github.com:kenoh/dotfiles.git"
+    dest: "{{ dotfiles_dir }}"
+    update: "{{ dotfiles_update }}"
+    accept_hostkey: yes
+
+- name: install epel
+  package:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+  become: yes
+  when: (ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat') and ansible_distribution_major_version == '7'
+
+- name: skip init the next time
+  set_fact:
+    dotfiles_initted: true

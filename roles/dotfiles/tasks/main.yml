@@ -1,29 +1,11 @@
 ---
-- name: set fact dotfiles_dir
-  set_fact:
-    dotfiles_dir: "{{ ansible_user_dir }}/dotfiles"
-- name: clone repo
-  git:
-    repo: "git@github.com:kenoh/dotfiles.git"
-    dest: "{{ dotfiles_dir }}"
-    update: yes
-    accept_hostkey: yes
-- name: ensure stow is available
-  block:
-    - name: install epel
-      package:
-        name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-        state: present
-      become: yes
-      when: (ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat') and ansible_distribution_major_version == '7'
-    - name: install stow
-      package:
-        name: stow
-        state: present
-      become: yes
+- name: init dotfiles
+  when: dotfiles_initted is undefined
+  include_tasks: init.yml
+
 - name: stow requested
   command: ./stow.sh "{{ item }}"
   args:
     chdir: "{{ dotfiles_dir }}"
   with_items: "{{ stow }}"
-  when: stow is defined
+  # when: stow is defined
